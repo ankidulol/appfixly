@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+// Components
+import React from 'react';
+import Landing from './components/wrappers/Landing/Landing';
+import Projects from './components/wrappers/Projects/Projects';
+import Contact from './components/wrappers/Contact/Contact';
+import Footer from './components/wrappers/Footer/Footer';
+import Banner from './components/utility/Banner/Banner';
+
+// Redux
+import { store } from './redux/index';
+import { Provider } from 'react-redux';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div>
+        <Banner />
+        <Landing />
+        <Projects />
+        <Contact />
+        <Footer />
+      </div>
+    </Provider>
   );
 }
 
