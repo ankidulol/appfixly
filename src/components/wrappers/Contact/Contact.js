@@ -54,15 +54,18 @@ function Form() {
       <Input
         maxLength={50}
         onChange={e => setName(e.target.value)}
+        value={name}
         placeholder="Name"
       />
       <Input
         maxLength={50}
+        value={email}
         onChange={e => setEmail(e.target.value)}
         placeholder="Email"
       />
       <Input
         maxLength={50}
+        value={subject}
         onChange={e => setSubject(e.target.value)}
         placeholder="Subject"
       />
@@ -71,6 +74,7 @@ function Form() {
         rows={5}
         cols={5}
         onChange={e => setMessage(e.target.value)}
+        value={message}
         placeholder="Your message"
       />
       <SendButton
@@ -79,6 +83,10 @@ function Form() {
           setLoading(true);
           await sendMessage(name, email, subject, message);
           setLoading(false);
+          setName('');
+          setEmail('');
+          setSubject('');
+          setMessage('');
         }}
       >
         {loading ? (

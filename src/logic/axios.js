@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-const production = true;
-
-export default production
+export default process.env.NODE_ENV === 'development'
   ? axios.create({
-      baseURL: 'http://appfixly.com/api/'
+      baseURL: 'http://localhost:3001/'
     })
   : axios.create({
-      baseURL: 'http://localhost:3001/'
+      baseURL: 'http://appfixly.com/api/'
     });
