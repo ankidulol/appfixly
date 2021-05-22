@@ -53,6 +53,11 @@ describe('validateSubject()', () => {
       validateSubject("Subject, with . and ' and !! exlamation marks")
     ).toBe(false);
   });
+  it('"Offer: $123,123 or £312.312 & 1231le€" should return error false"', () => {
+    expect(validateSubject('"Offer: $123,123 or £312.312 & 1231le€"')).toBe(
+      false
+    );
+  });
 });
 
 describe('validateEmail()', () => {
@@ -155,5 +160,11 @@ nm("?=))"):,.
 =/&`;
   it(longMessage5 + ' should return error false', () => {
     expect(validateMessage(longMessage5)).toBe(false);
+  });
+
+  it('"Offer: $123,123 or £312.312 & 1231le€" should return error false"', () => {
+    expect(validateMessage('"Offer: $123,123 or £312.312 & 1231le€"')).toBe(
+      false
+    );
   });
 });

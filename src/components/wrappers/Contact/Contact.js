@@ -2,20 +2,24 @@
 import React, { useState } from 'react';
 import Title from '../../globals/Title/Title';
 import Loader from 'react-loader-spinner';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 // Utility
 import { useWindowSize } from '../../../hooks/windowSize';
 import { sendMessage } from '../../../logic/api';
+import { sleep } from '../../../logic/helpers';
 
 // Styles
 import {
   Wrapper,
   Container,
+  HeaderContainer,
   Header,
   MessageContainer,
   Input,
   Textarea,
-  SendButton
+  SendButton,
+  EmailLink
 } from './styles';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
@@ -26,13 +30,17 @@ function Contact() {
     <Wrapper>
       <Title>CONTACT</Title>
       <Container>
-        <Header style={{ fontSize: width < 1000 && '3em' }}>
-          If you need any
-          <br /> further information,
-          <br />
-          <span>feel free to contact me.</span>
-        </Header>
-
+        <HeaderContainer>
+          <Header style={{ fontSize: width < 1000 && '3em' }}>
+            If you need any
+            <br /> further information,
+            <br />
+            <span>feel free to contact us.</span>
+          </Header>
+          <EmailLink href={'mailto:joonas@appfixly.com'}>
+            Or send us email
+          </EmailLink>
+        </HeaderContainer>
         <MessageContainer style={{ width: width < 600 && '90%' }}>
           <Form />
         </MessageContainer>
@@ -47,6 +55,7 @@ function Form() {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showCAPTCHA, setCAPTCHA] = useState(false);
 
   return (
     <>
@@ -61,6 +70,7 @@ function Form() {
         maxLength={50}
         value={email}
         onChange={e => setEmail(e.target.value)}
+        type="email"
         placeholder="Email"
       />
       <Input
@@ -77,16 +87,30 @@ function Form() {
         value={message}
         placeholder="Your message"
       />
+      {showCAPTCHA && (
+        <ReCAPTCHA
+          sitekey="6LfvxuIaAAAAAClpGvj2QzPyYT52b7XEGvT6PRTS"
+          onChange={async value => {
+            setCAPTCHA(false);
+            if (value) {
+              setLoading(true);
+              const success = await sendMessage(name, email, subject, message);
+              if (success) {
+                setName('');
+                setEmail('');
+                setSubject('');
+                setMessage('');
+                await sleep(1000);
+              }
+              setLoading(false);
+            }
+          }}
+        />
+      )}
       <SendButton
         onClick={async () => {
           if (loading) return;
-          setLoading(true);
-          await sendMessage(name, email, subject, message);
-          setLoading(false);
-          setName('');
-          setEmail('');
-          setSubject('');
-          setMessage('');
+          setCAPTCHA(true);
         }}
       >
         {loading ? (

@@ -7,7 +7,6 @@ import {
 } from './validators';
 import { store } from '../redux/index';
 import { showBanner } from '../redux/actions/banner';
-import { sleep } from './helpers';
 
 const sendMessage = async (name, email, subject, message) => {
   const { dispatch } = store;
@@ -19,11 +18,13 @@ const sendMessage = async (name, email, subject, message) => {
     () => validateMessage(message)
   ]) {
     const err = validate();
-    if (err) return dispatch(showBanner(err));
+    if (err) {
+      dispatch(showBanner(err));
+      return false;
+    }
   }
 
   try {
-    await sleep(1000);
     await axiosInstance.post('/message/send', {
       name,
       email,
@@ -32,6 +33,7 @@ const sendMessage = async (name, email, subject, message) => {
     });
 
     dispatch(showBanner('Thank you for your message!!', '#08e4c1'));
+    return true;
   } catch (e) {
     if (e.response) {
       dispatch(showBanner('Something went wrong'));
@@ -40,6 +42,7 @@ const sendMessage = async (name, email, subject, message) => {
     } else {
       dispatch(showBanner('Something went wrong'));
     }
+    return false;
   }
 };
 

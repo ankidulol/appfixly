@@ -23,7 +23,9 @@ const validateEmail = email => {
 const validateSubject = subject => {
   if (subject.length > 50) {
     return 'subject should be less than 50 characters';
-  } else if (!/^[a-zA-Z0-9.',\s!?+-äÄöÖåÅ:]+$/.test(subject ? subject : '')) {
+  } else if (
+    !/^[a-zA-Z0-9.',\s!?+-äÄöÖåÅ:"$£€&]+$/.test(subject ? subject : '')
+  ) {
     return 'subject should include only letters';
   } else {
     return false;
@@ -33,7 +35,7 @@ const validateSubject = subject => {
 const validateMessage = message => {
   if (message.length > 1000) {
     return 'message should be less than 1000 characters';
-  } else if (!/^[a-zA-Z0-9".,'\s!?=+-äÄöÖåÅ:]+$/m.test(message)) {
+  } else if (!/^[a-zA-Z0-9".,'\s!?=+-äÄöÖåÅ:"$£€&]+$/m.test(message)) {
     return 'message should include only letters';
   } else {
     return false;

@@ -10,9 +10,8 @@ const Container = styled.div`
 
 const Header = styled.h1`
   font-size: 4em;
-  margin-bottom: 0.7em;
+  margin-bottom: 0.5em;
   font-family: Roboto;
-  padding-left: 0.2em;
 
   > span {
     color: #0cecc8;
@@ -84,13 +83,29 @@ const SendButton = styled.div`
   }
 `;
 
+const HeaderContainer = styled.div`
+  padding-left: 0.2em;
+  margin-bottom: 1em;
+`;
+
+const EmailLink = styled.a`
+  cursor: pointer;
+  font-family: Roboto;
+  font-weight: bold;
+  color: #323232;
+  font-size: 1.4em;
+  text-decoration: underline;
+`;
+
 export {
   Wrapper,
   Container,
+  HeaderContainer,
   Header,
   SubHeader,
   MessageContainer,
   Input,
   Textarea,
-  SendButton
+  SendButton,
+  EmailLink
 };
