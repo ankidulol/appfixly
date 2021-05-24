@@ -10,6 +10,8 @@ import { useWindowSize } from '../../../hooks/windowSize';
 import { Caret, Container, Img, badge } from './styles';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 
+console.log('creating ImageCarousel.js file...');
+
 function ImageCarousel({ imageData }) {
   const width = useWindowSize();
   const carouselPosition = useRef(0);

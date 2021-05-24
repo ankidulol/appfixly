@@ -63,16 +63,6 @@ function Landing() {
           We create web & mobile apps
           <br /> from design to finished product
         </SubHeader>
-
-        {/* <SubHeader */}
-        {/*   style={{ */}
-        {/*     fontSize: width < 1000 && '2em', */}
-        {/*     textAlign: width < 1000 && 'center' */}
-        {/*   }} */}
-        {/* > */}
-        {/*   I create and design apps */}
-        {/*   <br /> for the web and mobile */}
-        {/* </SubHeader> */}
         <ContactButton
           onClick={scrollToBottom}
           style={{
@@ -91,7 +81,7 @@ function Landing() {
           alt="landing_image"
           src={joonas}
           style={{
-            ...(width < 1000 && imgOpacity)
+            ...(width < 1220 && imgOpacity)
           }}
         />
       </ImgContainer>

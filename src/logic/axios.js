@@ -5,5 +5,5 @@ export default process.env.NODE_ENV === 'development'
       baseURL: 'http://localhost:3001/'
     })
   : axios.create({
-      baseURL: 'http://appfixly.com/api/'
+      baseURL: 'https://appfixly.com/api/'
     });
