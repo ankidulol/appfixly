@@ -46,4 +46,16 @@ const sendMessage = async (name, email, subject, message) => {
   }
 };
 
-export { sendMessage };
+const trackCampaign = async () => {
+  if (window.location.search) {
+    try {
+      await axiosInstance.post('/campaign/add', {
+        campaign: window.location.search
+      });
+    } finally {
+      window.location.replace(window.location.origin);
+    }
+  }
+};
+
+export { sendMessage, trackCampaign };

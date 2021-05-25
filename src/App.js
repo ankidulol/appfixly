@@ -10,6 +10,11 @@ import Banner from './components/utility/Banner/Banner';
 import { store } from './redux/index';
 import { Provider } from 'react-redux';
 
+// Logic
+import { trackCampaign } from './logic/api';
+
+trackCampaign();
+
 function App() {
   return (
     <Provider store={store}>
